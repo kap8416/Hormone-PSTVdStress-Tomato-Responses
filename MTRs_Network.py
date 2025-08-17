@@ -1,4 +1,4 @@
-# Five_MTRs_radial_EJA_combos_v5.py
+# MTRs_network.py
 # Script to generate radial network visualization of five MTRs and their regulons in tomato under PSTVd infection.
 # Author: Katia Aviña Padilla (2025)
 
