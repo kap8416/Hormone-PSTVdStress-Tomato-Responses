@@ -1,6 +1,6 @@
 # Five MTRs Radial Network – Shared Axis Targets
 
-This repository contains the script **`Five_MTRs_radial_EJA_combos_v5.py`**, which generates a radial network visualization of **five master transcriptional regulators (MTRs)** in *Solanum lycopersicum* under PSTVd infection.  
+This repository contains the script **`MTRs_network.py`**, which generates a radial network visualization of **five master transcriptional regulators (MTRs)** in *Solanum lycopersicum* under PSTVd infection.  
 The figure highlights shared-axis targets regulated across different hormonal pathways (ABA, Auxin, Ethylene, and Jasmonate).
 
 ## Features
