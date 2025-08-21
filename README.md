@@ -5,7 +5,7 @@
 
 This repository hosts code and resources for the **Phylogenomic Insights from PSTVd–Tomato Interactions** study, with a primary focus on identifying the **Evolutionary Reconstruction of GRNs**.  
 The transcriptomic GRN deconvolution and MRA are implemented in R using **corto**, based on our original script (see *scripts/CORTO_TOMATO-VIROID.R*).
-The evolutionary reconstruction of MTRs and regulon is performed using REvolutionH-tl [.](https://pypi.org/project/revolutionhtl/)
+The evolutionary reconstruction of MTRs and regulon is performed using REvolutionH-tl [More information here.](https://pypi.org/project/revolutionhtl/)
 
 
 ---
