@@ -4,8 +4,10 @@
 **Last Update:** 2025-08-21
 
 This repository hosts code and resources for the **Phylogenomic Insights from PSTVd–Tomato Interactions** study, with a primary focus on identifying the **Evolutionary Reconstruction of GRNs**.  
+
 The transcriptomic GRN deconvolution and MRA are implemented in R using **corto**, based on our original script (see *scripts/CORTO_TOMATO-VIROID.R*).
-The evolutionary reconstruction of MTRs and regulon is performed using REvolutionH-tl [More information here.](https://pypi.org/project/revolutionhtl/)
+
+The evolutionary reconstruction of MTRs and their corresponding regulon is performed using REvolutionH-tl [More information here.](https://pypi.org/project/revolutionhtl/)
 
 
 ---
@@ -80,9 +82,9 @@ From `scripts/`:
 source("CORTO_TOMATO-VIROID.R")  # downloads/reads GEO, RMA, builds regulons, runs MRA, writes outputs
 ```
 Key outputs:
-- `results/networks/net_corto.txt` (or similar)
+- `results/networks/net_corto_prom.txt` 
 - `results/mra_plots/cortoMRS_*.pdf`
-- `results/tables/results C vs S.txt`, etc.
+- `results/tables/results M vs S.txt`
 
 ### B) Radial MTR network figure (Python)
 The script expects a 2-column edge list (`source`, `target`) named **`net_corto_prom.txt`** (separator auto-detected).  
@@ -99,7 +101,7 @@ It produces `MTRs_Network.png/.svg/.pdf` with:
 ### C) Hormone target ortholog integration (R)
 From `scripts/`:
 ```r
-source("TomatoOrthologs_5Sets_FIXED.R")
+source("TomatoOrthologs_5Sets.R")
 ```
 Inputs expected in `~/Downloads/` (or adjust `setwd()`):  
 `ABA_interactorsEdit*.txt`, `Auxin_interactorsEdit*.txt`, `Ethylene_*interactorsEdit*.txt`, `MYCinteractorsEdit.txt`, and `orthologs*.tsv`.  
