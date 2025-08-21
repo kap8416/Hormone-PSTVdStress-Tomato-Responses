@@ -5,7 +5,7 @@
 
 This repository hosts code and resources for the **Phylogenomic Insights from PSTVd–Tomato Interactions** study, with a primary focus on identifying the **Evolutionary Reconstruction of GRNs**.  
 
-The transcriptomic GRN deconvolution and MRA are implemented in R using **corto**, based on our original script (see *scripts/CORTO_TOMATO-VIROID.R*).
+1) The transcriptomic GRN deconvolution and MRA are implemented in R using **corto**, based on our original script (see *scripts/CORTO_TOMATO-VIROID.R*).
 
 The evolutionary reconstruction of MTRs and their corresponding regulon is performed using REvolutionH-tl [More information here.](https://pypi.org/project/revolutionhtl/)
 
@@ -45,14 +45,44 @@ Input: GEO datasets **GSE106912** (leaves) and **GSE111736** (roots).
 Method: RMA normalization (affy) → **corto** network inference → **Master Regulator Analysis** (MRA) for C vs S, C vs M, S vs M.  
 Output: regulons, ranked MTRs, and PDF plots; exportable network files for Cytoscape.
 
-### 2) **Evolutionary Reconstruction of GRNs**  
-Input: regulator orthologs (PlantTFDB/RegMAP).  
-Task: reconstruct and compare GRNs in **domesticated vs wild tomato** under healthy vs disease conditions; extract MTR-modulated subnetworks.  
+### 2) **Phylogenomics Analysis (REvolutionH-tl)**  
+Input: FASTA sets and (for reconciliation) an **NHX species tree**. 
+  -Proteomes from Sol Genomics Network [FTP Site](https://solgenomics.net/) 
+We selected three wild and four domesticated hosts
+S. pennellii, S. pimpinellifolium, C. annuum var. glabriusculum
+S. lycopersicum, S. lycopersicum var. cerasiforme, C. annuum, S. tuberosum
 
-### 3) **Phylogenomics Analysis (REvolutionH-tl)**  
-Input: FASTA sets and (for reconciliation) an **NHX species tree**.  
 Steps (used here): 1–2 (alignments, best hits & orthogroups) → filter → 3–4 (gene trees, duplication resolution) → 6 (gene–species reconciliation).  
 Outputs: best hits, orthogroups, gene trees, resolved trees, reconciled summaries and visual reports.
+
+### 3) **Evolutionary Reconstruction of GRNs**  
+### 2) **Evolutionary Reconstruction of GRNs (ortholog integration and comparative analysis)**
+This step combines **`scripts/TomatoOrthologs_5Sets.R`** with additional custom Bash and R scripts.
+
+**Input**
+- Hormone target lists (ABA, Auxin, Ethylene activator/repressor, MYC2/Jasmonate).
+- Ortholog tables (`orthologs*.tsv`).
+- Regulatory maps from PlantTFDB:
+  - *S. lycopersicum* PlantTFDB (https://planttfdb.gao-lab.org)
+  - *S. pennellii* PlantTFDB
+
+**Task**
+- Map hormone-specific targets to orthologs and orthogroups across species.
+- Use **PlantTFDB regulatory maps** to reconstruct GRNs in domesticated (*S. lycopersicum*) and wild (*S. pennellii*) tomato.
+- Identify:
+  - **Conserved regulatory elements** across species.
+  - **Rewiring events** between healthy vs diseased states.
+  - **Conserved regulators** specific to the *S. pennellii* network.
+
+**How to run**
+```r
+# Ortholog integration (R):
+source("TomatoOrthologs_5Sets.R")
+
+# Additional comparative GRN scripts (Bash/R):
+bash comparative_grn_analysis.sh
+Rscript analyze_rewiring.R
+
 
 ---
 
