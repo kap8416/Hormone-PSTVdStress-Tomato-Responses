@@ -3,9 +3,9 @@
 **Code Contributors:**  Katia Aviña-Padilla · Octavio Zambada ·Luis Hernández · Manuel Barrios  
 **Last Update:** 2025-08-21
 
-This repository hosts code and resources for the **Phylogenomic Insights from PSTVd–Tomato Interactions**, with a primary focus on identifying **Evolutionary Reconstruction of GRNs**.  
+This repository hosts code and resources for the **Phylogenomic Insights from PSTVd–Tomato Interactions** study, with a primary focus on identifying the **Evolutionary Reconstruction of GRNs**.  
 The transcriptomic GRN deconvolution and MRA are implemented in R using **corto**, based on our original script (see *scripts/CORTO_TOMATO-VIROID.R*).
-The evolutionary reconstruction of MTRs and regulon is performed using REvolutionH-tl.
+The evolutionary reconstruction of MTRs and regulon is performed using REvolutionH-tl [.](https://pypi.org/project/revolutionhtl/)
 
 
 ---
@@ -16,16 +16,15 @@ The evolutionary reconstruction of MTRs and regulon is performed using REvolutio
 Hormone-PSTVdStress-Tomato-Responses/
 │
 ├── data/
-│   ├── GSE106912/              # Leaf transcriptomes (PSTVd mild vs severe)
-│   ├── GSE111736/              # Root transcriptomes (control vs infected)
+│   ├── GSE106912/              # Leaf transcriptome (PSTVd mild, PSTVd severe and Healthy mock-inoculated)
+│   ├── GSE111736/              # Root transcriptome (PSTVd mild, PSTVd severe and Healthy mock-inoculated)
 │   ├── Tomato_TFs.txt          # TF list (PlantTFDB-derived)
 │   └── Tomato_pheno.csv        # Sample metadata (C, M, S)
 │
 ├── scripts/
 │   ├── CORTO_TOMATO-VIROID.R   # GRN deconvolution + MRA (corto)
 │   ├── MTRs_Network.py         # Radial network viz (5 MTR hubs; shared/unique targets)
-│   └── TomatoOrthologs_5Sets_FIXED.R
-│       # Integrates 5 hormone target lists with ortholog tables + alluvial plot
+│   └── TomatoOrthologs_.R      # Integrates 5 hormone target lists with ortholog tables + alluvial plot
 │
 ├── results/
 │   ├── networks/               # net_corto*.txt / .sif (for Cytoscape)
@@ -131,6 +130,7 @@ Tip: use `python3 -m revolutionhtl.plot_summary` and `python3 -m revolutionhtl.p
 
 ## 📖 References
 - Mercatelli D., Lopez-Garcia G., Giorgi F. M. (2020). *corto: a lightweight R package for gene network inference and master regulator analysis.* **Bioinformatics**, 36(12):3916–3917. DOI: 10.1093/bioinformatics/btaa223  
+- Aviña-Padilla K, Zambada-Moreno O, Herrera-Oropeza GE, et al. Insights into the Transcriptional Reprogramming in Tomato Response to PSTVd Variants Using Network Approaches. Int J Mol Sci. 2022;23(11):5983. Published 2022 May 26. doi:10.3390/ijms23115983  
 - GEO datasets: **GSE106912**, **GSE111736**
 
 ---
