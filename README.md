@@ -178,4 +178,4 @@ python -m pip install pandas networkx matplotlib
 
 ## ✨ Citation
 If you use this repository or code, please cite:  
-> Aviña-Padilla K., Zambada O., Hernández L., Barrios M. **Hormone Master Regulators Under PSTVd Stress: A Phylogenomic and Network View in Solanaceae.** (2025).  
+> Aviña-Padilla K., et al. **Hormone Master Regulators Under PSTVd Stress: A Phylogenomic and Network View in Solanaceae.** (2025).  
