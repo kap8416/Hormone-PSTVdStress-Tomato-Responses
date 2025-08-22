@@ -43,9 +43,9 @@ MTRS = {
     "Solyc04g009440.2": {"abbr":"NAC", "horm_logic":"A", "fill": HORM_FILL["A"]}, # Auxin
 }
 
-# Borders by expression: ERF_C_5 induced=red, others repressed=blue
-INDUCED = {"Solyc02g077370.1"}
-RINGCOL = {k: ("#d32f2f" if k in INDUCED else "#1e88e5") for k in MTRS}
+# Borders by expression: induced=red, repressed=blue
+REPRESSSED = {"Solyc02g093130.1"}
+RINGCOL = {k: ("#1e88e5" if k in REPRESSSED else "#d32f2f") for k in MTRS}
 
 # -------------------- Utilities --------------------
 def base_id(x: str) -> str:
