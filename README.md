@@ -39,7 +39,8 @@ Hormone-PSTVdStress-Tomato-Responses/
 ```
 
 ---
-![PipelinePlosComputational](https://github.com/user-attachments/assets/4c648ec4-0876-4c4d-a4f2-4018f040f853)
+![PipelinePlosComputational](https://github.com/user-attachments/assets/5587dd45-9fd5-4c3d-8ba6-b3304d9d304f)
+
 
 ## 🔬 Analysis Pipeline (3 modules)
 
