@@ -5,7 +5,7 @@
 
 This repository hosts code and resources for the **phylogenomic and systems-level analysis of PSTVd–tomato interactions**, with a primary focus on identifying the **evolutionary reconstruction of gene regulatory networks (GRNs)** and **Master Transcriptional Regulators (MTRs) linked to hormone signaling**.  
 
-1. Transcriptomic GRN deconvolution and MRA are implemented in R using **corto**, based on our original script (*scripts/CORTO_TOMATO-VIROID.R*).  
+1. Transcriptomic GRN deconvolution and MRA are implemented in R using **corto**, based on our original script (*scripts/corto_PSTVdTomato.R*).  
 2. Evolutionary reconstruction of MTRs and their regulons is performed using **REvolutionH-tl** ([More information here](https://pypi.org/project/revolutionhtl/)).  
 3. Ortholog integration, comparative GRN analysis, rewiring, and network visualization are implemented in R, Bash, and Python.  
 
@@ -23,11 +23,11 @@ Hormone-PSTVdStress-Tomato-Responses/
 │   └── Tomato_pheno.csv        # Sample metadata (C, M, S)
 │
 ├── scripts/
-│   ├── CORTO_TOMATO-VIROID.R   # GRN deconvolution + MRA (corto)
-│   ├── MTRs_Network.py         # Radial visualization of MTRs (shared vs unique targets)
-│   ├── TomatoOrthologs_5Sets.R # Integrates hormone target lists with ortholog tables + alluvial plot
-│   ├── Regulatory-Network-Plotter.R # Multi-TSV visualization of tomato-PSTVd networks with igraph
-│   └── analyze_rewiring.R      # Rewiring metrics between networks (edge/node/global)
+│   ├── corto_PSTVdTomato.R            # GRN deconvolution + MRA (corto)
+│   ├── MTRs_Network.py                # Radial visualization of MTRs (shared vs unique targets)
+│   ├── TomatoOrthologs_5Sets.R        # Integrates hormone target lists with ortholog tables + alluvial plot
+│   ├── Regulatory-Network-Plotter.R   # Multi-TSV visualization of tomato-PSTVd networks with igraph
+│   └── analyze_rewiring.R             # Rewiring metrics between networks (edge/node/global)
 │
 ├── results/
 │   ├── networks/               # net_corto_prom.txt / .sif (for Cytoscape)
@@ -47,7 +47,8 @@ Hormone-PSTVdStress-Tomato-Responses/
 ### 1) **PSTVd GRN Construction (Transcriptomics → corto → MRA)**  
 **Input:** GEO datasets [GSE106912](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106912) (leaves) and [GSE111736](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE111736) (roots).  
 **Method:** RMA normalization (affy) → **corto** network inference → **MRA** for C vs S, C vs M, S vs M.  
-**Output:** regulons, ranked MTRs, MRA plots (PDF), Cytoscape-ready networks.  
+**Main output:**  net_corto_prom.txt (input for further analysis)
+**Additional Output:** regulons, ranked MTRs, MRA plots (PDF), Cytoscape-ready network.  
 
 ---
 
@@ -59,8 +60,8 @@ Hormone-PSTVdStress-Tomato-Responses/
 
 **Steps used:**  
 1–2 (alignments, best hits & orthogroups) → filter → 3–4 (gene trees, duplication resolution) → 6 (gene–species reconciliation).  
-**Output:** best hits, orthogroups, gene trees, resolved trees, reconciled summaries and visual reports.  
-
+**Output:** best hits, orthologs, orthogroups, gene trees, resolved trees, reconciled summaries and visual reports.  
+**Main output:**  Orthologs file labeled as orthologs_Solanaceae.tsv
 ---
 
 ### 3) **Evolutionary Reconstruction of GRNs (ortholog integration, comparative analysis, rewiring & plotting)**  
