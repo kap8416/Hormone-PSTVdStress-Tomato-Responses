@@ -44,7 +44,7 @@ MTRS = {
 }
 
 # Borders by expression: induced=red, repressed=blue
-REPRESSSED = {"Solyc02g093130.1"}
+REPRESSSED = {"Solyc02g093130.1"}  # ONLY this one repressed; all others induced
 RINGCOL = {k: ("#1e88e5" if k in REPRESSSED else "#d32f2f") for k in MTRS}
 
 # -------------------- Utilities --------------------
