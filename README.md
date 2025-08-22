@@ -174,7 +174,9 @@ python -m pip install pandas networkx matplotlib
 
 ## 📖 References
 - Mercatelli D., Lopez-Garcia G., Giorgi F. M. (2020). *corto: a lightweight R package for gene network inference and master regulator analysis.* **Bioinformatics**, 36(12):3916–3917. doi:10.1093/bioinformatics/btaa223  
-- Aviña-Padilla K., Zambada-Moreno O., Herrera-Oropeza G. E., et al. (2022). *Insights into the Transcriptional Reprogramming in Tomato Response to PSTVd Variants Using Network Approaches.* **Int J Mol Sci**, 23(11):5983. doi:10.3390/ijms23115983  
+- Aviña-Padilla K., Zambada-Moreno O., Herrera-Oropeza G. E., et al. (2022). *Insights into the Transcriptional Reprogramming in Tomato Response to PSTVd Variants Using Network Approaches.* **Int J Mol Sci**, 23(11):5983. doi:10.3390/ijms23115983
+-  Ramírez-Rafael J. A., Korchmaros A., Aviña-Padilla K., López-Sánchez A., España-Tinajero A. A., Hellmuth M., Stadler P. F., and Hernandez-Rosales M. (2024) REvolutionH-tl: Reconstruction of Evolutionary Histories tool. In Comparative Genomics: 21st International Conference, RECOMB-CG 2024, Boston, MA, USA, April 27–28, 2024, Proceedings. Springer-Verlag, Berlin, Heidelberg, 89–109. https://doi.org/10.1007/978-3-031-58072-7_5
+-  
 - GEO datasets: **GSE106912**, **GSE111736**  
 
 ---
