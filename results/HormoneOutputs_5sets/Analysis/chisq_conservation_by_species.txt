@@ -1,0 +1,24 @@
+# Tabla de contingencia (genes únicos globales)
+# A tibble: 50 × 3
+   Species_with_Ortholog ConservedGenes NotConserved
+   <chr>                          <int>        <int>
+ 1 Capana00g005100                    1          396
+ 2 Capana02g001588                    1          396
+ 3 Capana02g002203                    1          396
+ 4 Capana05g000846                    1          396
+ 5 Capana05g001715                    1          396
+ 6 Capana06g000438                    1          396
+ 7 Capana10g000032                    1          396
+ 8 Capana11g000046                    1          396
+ 9 Capana12g001128                    1          396
+10 Capang01g003212                    1          396
+# ℹ 40 more rows
+# ℹ Use `print(n = ...)` to see more rows
+
+# χ² test (Conserved vs Not conserved por especie)
+
+	Pearson's Chi-squared test
+
+data:  as.matrix(tab_s[, c("ConservedGenes", "NotConserved")])
+X-squared = 13257, df = 49, p-value < 2.2e-16
+
