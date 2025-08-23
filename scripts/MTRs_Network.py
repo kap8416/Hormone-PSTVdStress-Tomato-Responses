@@ -17,13 +17,13 @@ OUT_SVG = "MTRs_Network_v7.svg"
 OUT_PDF = "MTRs_Network_v7.pdf"
 
 # -------------------- Palettes --------------------
-# Hub fill colors by HORMONE
+# Hub fill colors by HORMONE (matching the R palette you provided)
 HORM_FILL = {
-    "ABA": "#f2c744",
-    "A": "#6cc36c",        # Auxin
-    "E_act": "#f28c28",    # Ethylene activator
-    "E_rep": "#ef6a6a",    # Ethylene repressor
-    "J": "#4d9de0",        # Jasmonate
+    "ABA": "#FFD700",       # gold
+    "A": "#FF69B4",         # hotpink2 (approx)
+    "E_act": "#ADD8E6",     # lightblue (Ethylene activator)
+    "E_rep": "#ADD8E6",     # lightblue (Ethylene repressor, same tone)
+    "J": "#98FB98",         # palegreen2
 }
 
 # Edge and shared target colors by HORMONAL COMBO
