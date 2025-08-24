@@ -20,25 +20,45 @@ This repository hosts code and resources for the **phylogenomic and systems-leve
 Hormone-PSTVdStress-Tomato-Responses/
 │
 ├── data/
-│   ├── GSE106912/              # Leaf transcriptome (PSTVd mild, severe, and healthy)
-│   ├── GSE111736/              # Root transcriptome (PSTVd mild, severe, and healthy)
-│   ├── Tomato_TFs.txt          # TF list (PlantTFDB-derived)
-│   └── Tomato_pheno.csv        # Sample metadata (C, M, S)
+│   └── Inputs/
+│       └── Hormone_5sets/                 # Input hormone-target interactors
+│           ├── ABA_interactorsEdit_sinPunto.txt
+│           ├── Auxin_interactorsEdit_sinPunto.txt
+│           ├── Ethylene_Solyc02g077370.1_interactors.txt
+│           ├── Ethylene_Solyc02g093130.1_interactors.txt
+│           ├── MYCinteractorsEdit.txt
+│           └── orthologs_Solanaceae.tsv   # Phylogenomic orthologs
 │
 ├── scripts/
-│   ├── corto_PSTVdTomato.R            # GRN deconvolution + MRA (corto)
-│   ├── MTRs_Network.py                # Radial visualization of MTRs (shared vs unique targets)
-│   ├── TomatoOrthologs_5Sets.R        # Integrates hormone target lists with ortholog tables + alluvial plot
-│   ├── Regulatory-Network-Plotter.R   # Multi-TSV visualization of tomato-PSTVd networks with igraph
-│   └── analyze_rewiring.R             # Rewiring metrics between networks (edge/node/global)
+│   ├── corto_PSTVdTomato.R                # GRN inference + MRA (corto)
+│   ├── extract_regulons.py                # Extract regulons from corto networks
+│   ├── MTRs_Network.py                    # Radial visualization of MTRs
+│   ├── Analyze_HormoneOrthologs_ALL.R     # Ortholog conservation (heatmaps, UpSet, χ²)
+│   ├── Network_visualizer.R               # igraph-based network plotting
+│   ├── networkx_pennelli.ipynb            # S. pennellii network visualization (Python + networkx)
+│   ├── tomato_healthy.Rmd                 # RMarkdown analysis of healthy tomato
+│   ├── int-tomato.Rmd                     # Integrative RMarkdown tomato transcriptomics
+│   ├── tomatohealthy_network.ipynb        # Healthy tomato networks (Jupyter)
+│   └── healthy-disease.ipynb              # Healthy vs diseased network comparisons (Jupyter)
 │
 ├── results/
-│   ├── networks/               # net_corto_prom.txt / .sif (for Cytoscape)
-│   ├── mra_plots/              # PDF figures from mraplot()
-│   ├── tables/                 # Top MTRs per comparison; summary TSVs
-│   └── rewiring/               # Gained/lost/signswitch/centrality metrics
+│   └── HormoneOutputs_5sets/
+│       └── Analysis/
+│           ├── HormoneOrthologs.txt / HormoneOrthologs_5sets.txt
+│           ├── *_OrthoSpecies.txt / *_numOrthoLikeCounts.txt
+│           ├── HormoneOrthologs_Alluvial.(png|pdf|svg)
+│           ├── duplicated_genesSpecies_*.txt
+│           ├── sessionInfo.txt
+│           ├── MTRs_Network_v7.(png|pdf|svg)
+│           ├── MTRs_Selected.csv
+│           ├── MTRs_orthologs_(heatmap|presence_absence.png)
+│           ├── MTRs_orthologs_(summary|table).tsv
+│           ├── net_corto_prom.txt
+│           ├── regulon_Solyc*.csv / .txt   # Per-MTR regulons
+│           └── regulon_summary_five_MTRs.csv
 │
 └── README.md
+
 ```
 
 ---
@@ -170,20 +190,22 @@ python -m pip install pandas networkx matplotlib
 
 ---
 
-## 📊 Expected Results
-- Regulatory networks of tomato under PSTVd infection with ranked **MTRs**.  
-- Comparative phylogenomics and ortholog integration of hormone targets.  
-- **Rewiring analysis**: conserved vs rewired edges, centrality changes, and global similarity metrics.  
-- Publication-quality outputs: MRA plots, radial MTR network, alluvial plots, and rewiring visualizations.  
+## 📊 Expected Outputs
+- Ranked **MTRs** under PSTVd stress.  
+- **Ortholog conservation** across Solanaceae: alluvial, UpSet, heatmaps, χ².  
+- **Comparative networks**: per hormone, per species, per condition.  
+- **Rewiring analysis**: gained/lost edges, sign-switches, Δcentrality, Jaccard.  
+- **Publication-quality figures**: radial MTR networks, ortholog integration plots, rewiring visualizations etc.  
 
 ---
 
 ## 📖 References
-- Mercatelli D., Lopez-Garcia G., Giorgi F. M. (2020). *corto: a lightweight R package for gene network inference and master regulator analysis.* **Bioinformatics**, 36(12):3916–3917. doi:10.1093/bioinformatics/btaa223  
-- Aviña-Padilla K., Zambada-Moreno O., Herrera-Oropeza G. E., et al. (2022). *Insights into the Transcriptional Reprogramming in Tomato Response to PSTVd Variants Using Network Approaches.* **Int J Mol Sci**, 23(11):5983. doi:10.3390/ijms23115983
--  Ramírez-Rafael J. A., Korchmaros A., Aviña-Padilla K., López-Sánchez A., España-Tinajero A. A., Hellmuth M., Stadler P. F., and Hernandez-Rosales M. (2024) REvolutionH-tl: Reconstruction of Evolutionary Histories tool. In Comparative Genomics: 21st International Conference, RECOMB-CG 2024, Boston, MA, USA, April 27–28, 2024, Proceedings. Springer-Verlag, Berlin, Heidelberg, 89–109. https://doi.org/10.1007/978-3-031-58072-7_5
--  
-- GEO datasets: **GSE106912**, **GSE111736**  
+- Mercatelli D., Lopez-Garcia G., Giorgi F. M. (2020). *corto: a lightweight R package for gene network inference and master regulator analysis.* **Bioinformatics**, 36(12):3916–3917.  
+- Aviña-Padilla K., Zambada-Moreno O., Herrera-Oropeza G. E., et al. (2022). *Insights into the Transcriptional Reprogramming in Tomato Response to PSTVd Variants Using Network Approaches.* **Int J Mol Sci**, 23(11):5983.  
+- Ramírez-Rafael J. A., Korchmaros A., Aviña-Padilla K., et al. (2024). *REvolutionH-tl: Reconstruction of Evolutionary Histories tool.* In **RECOMB-CG 2024**, Springer.  
+- Aviña-Padilla K., Zambada-Moreno O., Bustamante Castillo M., Barrios-Izás M. A., Hernández-Rosales M. (2025). *Evolutionary Reconstruction of Hormone-bHLH Regulatory Networks in Solanaceae: Phylogenomic Insights from PSTVd-Tomato Interactions.* **bioRxiv** 2025.03.14.643413. doi: [https://doi.org/10.1101/2025.03.14.643413](https://doi.org/10.1101/2025.03.14.643413)  
+- GEO datasets: [GSE106912](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106912), [GSE111736](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE111736).  
+
 
 ---
 
