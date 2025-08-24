@@ -47,8 +47,6 @@ Hormone-PSTVdStress-Tomato-Responses/
 
 ## 🔬 Analysis Pipeline (3 modules)
 
-## 🔬 Analysis Pipeline (3 modules)
-
 ### **1) PSTVd GRN Construction (Transcriptomics → corto → MRA)**  
 - **Input:** GEO datasets [GSE106912](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106912) (leaves) and [GSE111736](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE111736) (roots).  
 - **Method:** RMA normalization (affy) → **corto** network inference → **MRA** for C vs S, C vs M, S vs M.  
