@@ -10,7 +10,8 @@ This repository hosts code and resources for the **phylogenomic and systems-leve
 
 1. Transcriptomic GRN deconvolution and MRA are implemented in R using **corto**, based on our original script (*scripts/corto_PSTVdTomato.R*).  
 2. Evolutionary reconstruction of MTRs and their regulons is performed using **REvolutionH-tl** ([More information here](https://pypi.org/project/revolutionhtl/)).  
-3. Ortholog integration, comparative GRN analysis, rewiring, and network visualization are implemented in R, Bash, and Python.  
+3. Ortholog integration, comparative GRN analysis, rewiring, and network visualization are implemented in R, Bash, and Python.
+![PipelinePlosComputational](https://github.com/user-attachments/assets/5587dd45-9fd5-4c3d-8ba6-b3304d9d304f) 
 
 ---
 
@@ -62,9 +63,6 @@ Hormone-PSTVdStress-Tomato-Responses/
 ```
 
 ---
-![PipelinePlosComputational](https://github.com/user-attachments/assets/5587dd45-9fd5-4c3d-8ba6-b3304d9d304f)
-
-
 ## 🔬 Analysis Pipeline (3 modules)
 
 ### **1) PSTVd GRN Construction (Transcriptomics → corto → MRA)**  
