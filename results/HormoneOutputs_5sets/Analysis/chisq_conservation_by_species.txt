@@ -1,0 +1,15 @@
+# A tibble: 6 × 3
+  Species_with_Ortholog ConservedGenes NotConserved
+  <chr>                          <int>        <dbl>
+1 Dom. pepper                      302           98
+2 Potato                           324           76
+3 S. pennellii                     347           53
+4 S. pimp.                         326           74
+5 Tomato cherry                    332           68
+6 Wild pepper                      299          101
+
+	Pearson's Chi-squared test
+
+data:  as.matrix(tab_s[, c("ConservedGenes", "NotConserved")])
+X-squared = 26.564, df = 5, p-value = 6.935e-05
+

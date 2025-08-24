@@ -1,0 +1,13 @@
+# A tibble: 4 × 3
+  Hormone       `Has Ortholog` `No Ortholog`
+  <fct>                  <int>         <int>
+1 ABA                       31             3
+2 Auxin                    130             8
+3 Ethylene                 179            11
+4 Jasmonic Acid             92             4
+
+	Pearson's Chi-squared test
+
+data:  as.matrix(tab_h[, c("Has Ortholog", "No Ortholog")])
+X-squared = 1.0458, df = 3, p-value = 0.7902
+

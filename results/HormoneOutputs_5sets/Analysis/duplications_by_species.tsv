@@ -1,0 +1,25 @@
+Hormone	Species_with_Ortholog	N_genes	N_dup	Percent_dup
+ABA	Dom. pepper	26	23	88.46153846153847
+ABA	Potato	24	8	33.333333333333336
+ABA	S. pennellii	27	0	0
+ABA	S. pimp.	26	0	0
+ABA	Tomato cherry	25	0	0
+ABA	Wild pepper	25	10	40
+Auxin	Dom. pepper	105	27	25.714285714285715
+Auxin	Potato	119	59	49.57983193277311
+Auxin	S. pennellii	121	23	19.00826446280992
+Auxin	S. pimp.	114	18	15.789473684210526
+Auxin	Tomato cherry	117	15	12.820512820512821
+Auxin	Wild pepper	100	30	30
+Ethylene	Dom. pepper	134	16	11.940298507462687
+Ethylene	Potato	146	35	23.972602739726028
+Ethylene	S. pennellii	166	10	6.024096385542169
+Ethylene	S. pimp.	156	3	1.9230769230769231
+Ethylene	Tomato cherry	157	4	2.5477707006369426
+Ethylene	Wild pepper	135	13	9.62962962962963
+Jasmonic Acid	Dom. pepper	78	16	20.512820512820515
+Jasmonic Acid	Potato	81	44	54.32098765432099
+Jasmonic Acid	S. pennellii	86	7	8.13953488372093
+Jasmonic Acid	S. pimp.	80	10	12.5
+Jasmonic Acid	Tomato cherry	82	7	8.536585365853659
+Jasmonic Acid	Wild pepper	78	12	15.384615384615385
