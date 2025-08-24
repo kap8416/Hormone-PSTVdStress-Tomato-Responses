@@ -1,7 +1,8 @@
-# 🌱 Evolutionary Reconstruction of Master Transcriptional Regulation of Hormone PSTVd–Tomato Responses
+# 🌱 Evolutionary Reconstruction of Hormone-Driven Master Regulators in PSTVd–Tomato Responses
 
-**Code Contributors:** Katia Aviña-Padilla · Octavio Zambada · Luis Hernández · Manuel Barrios  
-**Last Update:** 2025-08-21  
+**Code Contributors:** Katia Aviña-Padilla · Octavio Zambada · Luis Hernández · Manuel Barrios
+  **Supervision** Katia Aviña-Padilla · Maribel Hernández Rosales
+**Last Update:** 2025-08-24  
 
 This repository hosts code and resources for the **phylogenomic and systems-level analysis of PSTVd–tomato interactions**, with a primary focus on identifying the **evolutionary reconstruction of gene regulatory networks (GRNs)** and **Master Transcriptional Regulators (MTRs) linked to hormone signaling**.  
 
@@ -44,43 +45,48 @@ Hormone-PSTVdStress-Tomato-Responses/
 
 ## 🔬 Analysis Pipeline (3 modules)
 
-### 1) **PSTVd GRN Construction (Transcriptomics → corto → MRA)**  
-**Input:** GEO datasets [GSE106912](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106912) (leaves) and [GSE111736](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE111736) (roots).  
-**Method:** RMA normalization (affy) → **corto** network inference → **MRA** for C vs S, C vs M, S vs M.  
-**Main output:**  net_corto_prom.txt (input for further analysis)
-**Additional Output:** regulons, ranked MTRs, MRA plots (PDF), Cytoscape-ready network.  
+## 🔬 Analysis Pipeline (3 modules)
+
+### **1) PSTVd GRN Construction (Transcriptomics → corto → MRA)**  
+- **Input:** GEO datasets [GSE106912](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106912) (leaves) and [GSE111736](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE111736) (roots).  
+- **Method:** RMA normalization (affy) → **corto** network inference → **MRA** for C vs S, C vs M, S vs M.  
+- **Main output:** `net_corto_prom.txt` (input for further analyses).  
+- **Additional outputs:** regulons (`regulon_Solyc*.txt/csv`), ranked MTRs, MRA plots (PDF), Cytoscape-ready networks.  
 
 ---
 
-### 2) **Phylogenomics Analysis (REvolutionH-tl)**  
-**Input:** protein FASTA files from the [Sol Genomics Network](https://solgenomics.net/) and an **NHX species tree**.  
-**Species analyzed:**  
-- Wild: *S. pennellii*, *S. pimpinellifolium*, *C. annuum* var. *glabriusculum*  
-- Domesticated: *S. lycopersicum*, *S. lycopersicum* var. *cerasiforme*, *C. annuum*, *S. tuberosum*  
+### **2) Phylogenomics Analysis (REvolutionH-tl)**  
+- **Input:** protein FASTA files from the [Sol Genomics Network](https://solgenomics.net/) and an **NHX species tree**.  
+- **Species analyzed:**  
+  - *Wild:* *S. pennellii*, *S. pimpinellifolium*, *C. annuum* var. *glabriusculum*  
+  - *Domesticated:* *S. lycopersicum*, *S. cerasiforme*, *C. annuum*, *S. tuberosum*  
 
-###**Steps used:**  
-1–2 (alignments, best hits & orthogroups) → filter → 3–4 (gene trees, duplication resolution) → 6 (gene–species reconciliation).  
-**Output:** best hits, orthologs, orthogroups, gene trees, resolved trees, reconciled summaries and visual reports.  
-**Main output:**  Orthologs file labeled as orthologs_Solanaceae.tsv
+- **Steps used:**  
+  1–2 (alignments, best hits & orthogroups) → filtering → 3–4 (gene trees, duplication resolution) → 6 (gene–species reconciliation).  
+
+- **Outputs:** best hits, orthologs, orthogroups, gene trees, resolved trees, reconciled summaries and visual reports.  
+- **Main output:** `orthologs_Solanaceae.tsv`.  
+
 ---
 
-### 3) **Evolutionary Reconstruction of GRNs (ortholog integration, comparative analysis, rewiring & plotting)**  
-This step combines **`scripts/TomatoOrthologs_5Sets.R`**, Bash pipelines for species/condition networks, the **analyze_rewiring.R** script, and the **Regulatory-Network-Plotter** for visualization.
+### **3) Evolutionary Reconstruction of GRNs (ortholog integration, comparative analysis, rewiring & plotting)**  
+This module integrates multi-species orthologs with GRN inference results to reconstruct and compare hormone-driven regulatory programs.  
 
-**Input**
-- Hormone target lists (ABA, Auxin, Ethylene activator/repressor, MYC2/Jasmonate).  
-- Ortholog tables (`orthologs*.tsv`).  
-- PlantTFDB regulatory maps (*S. lycopersicum*, *S. pennellii*).  
-- Species/condition-specific edge lists in TSV (4 columns: src, tgt, src_mode, tgt_mode).  
+- **Inputs:**  
+  - Hormone target lists (ABA, Auxin, Ethylene activator/repressor, MYC2/Jasmonate).  
+  - Ortholog tables (`orthologs*.tsv`).  
+  - PlantTFDB regulatory maps (*S. lycopersicum*, *S. pennellii*).  
+  - Species/condition-specific edge lists (TSV: `src, tgt, src_mode, tgt_mode`).  
 
-**Tasks**
-1. **Ortholog integration (R):** map hormone targets to orthologs/orthogroups; detect duplicates; generate alluvial summaries.  
-2. **Comparative GRN construction (Bash + R):** build per-species/per-condition TSV networks and concatenate by phylogeny.  
-3. **Rewiring analysis (R):** quantify edge/node/global changes between states and species:  
-   - Edge-level: gained/lost/sign-switch events.  
-   - Node-level (MTRs): Δ-outdegree, Δ-betweenness, Δ-regulon size.  
-   - Global: Jaccard similarity and total edit distance.  
-4. **Visualization (R):** plot comparable networks (PNG/SVG) using **Regulatory-Network-Plotter** with a common layout.
+- **Tasks:**  
+  1. **Ortholog integration (R):** map hormone targets to orthologs/orthogroups; detect duplicates; generate alluvial and UpSet summaries.  
+  2. **Comparative GRN construction (Bash + R):** build per-species/per-condition TSV networks and concatenate by phylogeny.  
+  3. **Rewiring analysis (R):** quantify edge/node/global changes between states and species:  
+     - *Edge-level:* gained/lost/sign-switch events.  
+     - *Node-level (MTRs):* Δ-outdegree, Δ-betweenness, Δ-regulon size.  
+     - *Global:* Jaccard similarity and edit distance.  
+  4. **Visualization (R):** plot comparable networks (PNG/SVG) using **Regulatory-Network-Plotter** with a unified layout.  
+
 
 **How to run**
 ```r
