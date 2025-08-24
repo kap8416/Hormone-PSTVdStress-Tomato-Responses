@@ -58,7 +58,7 @@ Hormone-PSTVdStress-Tomato-Responses/
 - Wild: *S. pennellii*, *S. pimpinellifolium*, *C. annuum* var. *glabriusculum*  
 - Domesticated: *S. lycopersicum*, *S. lycopersicum* var. *cerasiforme*, *C. annuum*, *S. tuberosum*  
 
-**Steps used:**  
+###**Steps used:**  
 1–2 (alignments, best hits & orthogroups) → filter → 3–4 (gene trees, duplication resolution) → 6 (gene–species reconciliation).  
 **Output:** best hits, orthologs, orthogroups, gene trees, resolved trees, reconciled summaries and visual reports.  
 **Main output:**  Orthologs file labeled as orthologs_Solanaceae.tsv
