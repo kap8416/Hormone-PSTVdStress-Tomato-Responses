@@ -1,6 +1,6 @@
 # 🌱 Evolutionary Reconstruction of Hormone-Driven Master Regulators in PSTVd–Tomato Responses
 
-##**Code Contributors:** Katia Aviña-Padilla · Octavio Zambada · Luis Hernández · Manuel Barrios
+## **Code Contributors:** Katia Aviña-Padilla · Octavio Zambada · Luis Hernández · Manuel Barrios
 
 **Supervision** Katia Aviña-Padilla · Maribel Hernández Rosales
 
