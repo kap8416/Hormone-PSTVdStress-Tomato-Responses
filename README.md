@@ -1,7 +1,9 @@
 # 🌱 Evolutionary Reconstruction of Hormone-Driven Master Regulators in PSTVd–Tomato Responses
 
-**Code Contributors:** Katia Aviña-Padilla · Octavio Zambada · Luis Hernández · Manuel Barrios
-  **Supervision** Katia Aviña-Padilla · Maribel Hernández Rosales
+##**Code Contributors:** Katia Aviña-Padilla · Octavio Zambada · Luis Hernández · Manuel Barrios
+
+**Supervision** Katia Aviña-Padilla · Maribel Hernández Rosales
+
 **Last Update:** 2025-08-24  
 
 This repository hosts code and resources for the **phylogenomic and systems-level analysis of PSTVd–tomato interactions**, with a primary focus on identifying the **evolutionary reconstruction of gene regulatory networks (GRNs)** and **Master Transcriptional Regulators (MTRs) linked to hormone signaling**.  
