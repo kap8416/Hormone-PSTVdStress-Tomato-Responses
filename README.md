@@ -198,13 +198,11 @@ python -m pip install pandas networkx matplotlib
 ---
 
 ## 📖 References
-- Mercatelli D., Lopez-Garcia G., Giorgi F. M. (2020). *corto: a lightweight R package for gene network inference and master regulator analysis.* **Bioinformatics**, 36(12):3916–3917.  
-- Aviña-Padilla K., Zambada-Moreno O., Herrera-Oropeza G. E., et al. (2022). *Insights into the Transcriptional Reprogramming in Tomato Response to PSTVd Variants Using Network Approaches.* **Int J Mol Sci**, 23(11):5983.  
-- Ramírez-Rafael J. A., Korchmaros A., Aviña-Padilla K., et al. (2024). *REvolutionH-tl: Reconstruction of Evolutionary Histories tool.* In **RECOMB-CG 2024**, Springer.  
+- Mercatelli D., Lopez-Garcia G., Giorgi F. M. (2020). *corto: a lightweight R package for gene network inference and master regulator analysis.* **Bioinformatics**, 36(12):3916–3917. doi: [10.1093/bioinformatics/btaa223](https://doi.org/10.1093/bioinformatics/btaa223)  
+- Aviña-Padilla K., Zambada-Moreno O., Herrera-Oropeza G. E., et al. (2022). *Insights into the Transcriptional Reprogramming in Tomato Response to PSTVd Variants Using Network Approaches.* **Int J Mol Sci**, 23(11):5983. doi: [10.3390/ijms23115983](https://doi.org/10.3390/ijms23115983)  
+- Ramírez-Rafael J. A., Korchmaros A., Aviña-Padilla K., et al. (2024). *REvolutionH-tl: Reconstruction of Evolutionary Histories tool.* In **Comparative Genomics: RECOMB-CG 2024, Boston, MA, USA, Proceedings.** Springer, 89–109. doi: [10.1007/978-3-031-58072-7_5](https://doi.org/10.1007/978-3-031-58072-7_5)    
 - Aviña-Padilla K., Zambada-Moreno O., Bustamante Castillo M., Barrios-Izás M. A., Hernández-Rosales M. (2025). *Evolutionary Reconstruction of Hormone-bHLH Regulatory Networks in Solanaceae: Phylogenomic Insights from PSTVd-Tomato Interactions.* **bioRxiv** 2025.03.14.643413. doi: [https://doi.org/10.1101/2025.03.14.643413](https://doi.org/10.1101/2025.03.14.643413)  
 - GEO datasets: [GSE106912](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106912), [GSE111736](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE111736).  
-
-
 ---
 
 ## ✨ Citation
