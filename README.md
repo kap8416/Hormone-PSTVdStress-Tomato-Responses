@@ -98,7 +98,7 @@ This module integrates multi-species orthologs with GRN inference results to rec
 
 - **Tasks:**  
   1. **Ortholog integration (R):** map hormone targets to orthologs/orthogroups; detect duplicates; generate alluvial and UpSet summaries.  
-  2. **Comparative GRN construction (Bash + R):** build per-species/per-condition TSV networks and concatenate by phylogeny.  
+  2. **Comparative GRN construction (Bash + R):** build per-species/per-condition TSV networks and integrated by phylogeny.  
   3. **Rewiring analysis (R):** quantify edge/node/global changes between states and species:  
      - *Edge-level:* gained/lost/sign-switch events.  
      - *Node-level (MTRs):* Δ-outdegree, Δ-betweenness, Δ-regulon size.  
@@ -114,21 +114,187 @@ source("scripts/TomatoOrthologs_5Sets.R")
 
 ```bash
 # 2) Comparative networks
+# Create working directories
+mkdir preprocessing
+cd preprocessing
+mkdir NAC
+mkdir ethylene_AP2
+mkdir ethylene_ERF_C_5
+mkdir MYC2
+mkdir bZIP
+
+# Create template reference files for tomato interactions
+awk -v OFS='\t' '{print $2, $1, "1", "1"}' ../Auxin_interactors.tsv > NAC/tomato.tsv
+awk -v OFS='\t' '{print $2, $1, "1", "1"}' ../Ethylene_Solyc02g093130.1_interactors.tsv > ethylene_AP2/tomato.tsv
+awk -v OFS='\t' '{print $2, $1, "1", "1"}' ../Ethylene_Solyc02g077370.1_interactors.tsv > ethylene_ERF_C_5/tomato.tsv
+awk -v OFS='\t' '{print $2, $1, "1", "1"}' ../MYCinteractorsEdit.tsv > MYC2/tomato.tsv
+awk -v OFS='\t' '{print $2, $1, "1", "1"}' ../ABA_interactors.tsv > bZIP/tomato.tsv
+
+# Generate species-specific network files for MYC2
+cd MYC2
+awk -v species="Potato" -F '\t' 'BEGIN {OFS="\t"} 
+FNR==NR {
+  sub(/\r$/, "", $4)
+  if ($4 == species && $3 == "Has Ortholog") {
+    has_ortholog[$1] = 1
+  }
+  next
+}
+{
+  col3 = ($1 in has_ortholog) ? 1 : 2
+  col4 = ($2 in has_ortholog) ? 1 : 2
+  print $1, $2, col3, col4
+}' ../../HormoneOrthologs.tsv tomato.tsv > Potato.tsv
+
+awk -v species="Dom. pepper" -F '\t' 'BEGIN {OFS="\t"} 
+FNR==NR {
+  sub(/\r$/, "", $4)
+  if ($4 == species && $3 == "Has Ortholog") {
+    has_ortholog[$1] = 1
+  }
+  next
+}
+{
+  col3 = ($1 in has_ortholog) ? 1 : 2
+  col4 = ($2 in has_ortholog) ? 1 : 2
+  print $1, $2, col3, col4
+}' ../../HormoneOrthologs.tsv tomato.tsv > Dom_pepper.tsv
+
+awk -v species="S. pennellii" -F '\t' 'BEGIN {OFS="\t"}
+FNR==NR {
+  sub(/\r$/, "", $4)
+  if ($4 == species && $3 == "Has Ortholog") {
+    has_ortholog[$1] = 1
+  }
+  next
+}
+{
+  col3 = ($1 in has_ortholog) ? 1 : 2
+  col4 = ($2 in has_ortholog) ? 1 : 2
+  print $1, $2, col3, col4
+}' ../../HormoneOrthologs.tsv tomato.tsv > S_pennellii.tsv
+
+awk -v species="S. pimp." -F '\t' 'BEGIN {OFS="\t"}
+FNR==NR {
+  sub(/\r$/, "", $4)
+  if ($4 == species && $3 == "Has Ortholog") {
+    has_ortholog[$1] = 1
+  }
+  next
+}
+{
+  col3 = ($1 in has_ortholog) ? 1 : 2
+  col4 = ($2 in has_ortholog) ? 1 : 2
+  print $1, $2, col3, col4
+}' ../../HormoneOrthologs.tsv tomato.tsv > S_pimp.tsv
+
+awk -v species="Tomato cherry" -F '\t' 'BEGIN {OFS="\t"}
+FNR==NR {
+  sub(/\r$/, "", $4)
+  if ($4 == species && $3 == "Has Ortholog") {
+    has_ortholog[$1] = 1
+  }
+  next
+}
+{
+  col3 = ($1 in has_ortholog) ? 1 : 2
+  col4 = ($2 in has_ortholog) ? 1 : 2
+  print $1, $2, col3, col4
+}' ../../HormoneOrthologs.tsv tomato.tsv > Tomato_cherry.tsv
+
+awk -v species="Wild pepper" -F '\t' 'BEGIN {OFS="\t"}
+FNR==NR {
+  sub(/\r$/, "", $4)
+  if ($4 == species && $3 == "Has Ortholog") {
+    has_ortholog[$1] = 1
+  }
+  next
+}
+{
+  col3 = ($1 in has_ortholog) ? 1 : 2
+  col4 = ($2 in has_ortholog) ? 1 : 2
+  print $1, $2, col3, col4
+}' ../../HormoneOrthologs.tsv tomato.tsv > Wild_pepper.tsv
+
+# Repeat the above process for other transcription factor families
+# Example for NAC:
+cd ../NAC
+awk -v species="Potato" -F '\t' 'BEGIN {OFS="\t"} 
+FNR==NR {
+  sub(/\r$/, "", $4)
+  if ($4 == species && $3 == "Has Ortholog") {
+    has_ortholog[$1] = 1
+  }
+  next
+}
+{
+  col3 = ($1 in has_ortholog) ? 1 : 2
+  col4 = ($2 in has_ortholog) ? 1 : 2
+  print $1, $2, col3, col4
+}' ../../HormoneOrthologs.tsv tomato.tsv > Potato.tsv
+
+# Integrate networks based on phylogeny (example for MYC2)
+cd ../MYC2
+awk '
+BEGIN {
+    FS = OFS = "\t"
+}
+NR == FNR {
+    col3_1[$1,$2] = $3
+    col4_1[$1,$2] = $4
+    next
+}
+{
+    key1 = $1
+    key2 = $2
+    c3_1 = col3_1[key1,key2]
+    c4_1 = col4_1[key1,key2]
+    c3_2 = $3
+    c4_2 = $4
+    new3 = (c3_1 == 1 || c3_2 == 1) ? 1 : 2
+    new4 = (c4_1 == 1 || c4_2 == 1) ? 1 : 2
+    print key1, key2, new3, new4
+}' Tomato_cherry.tsv S_pimp.tsv > Tomato_cherry_S_pimp.tsv
+
+awk '
+BEGIN {
+    FS = OFS = "\t"
+}
+NR == FNR {
+    col3_1[$1,$2] = $3
+    col4_1[$1,$2] = $4
+    next
+}
+{
+    key1 = $1
+    key2 = $2
+    c3_1 = col3_1[key1,key2]
+    c4_1 = col4_1[key1,key2]
+    c3_2 = $3
+    c4_2 = $4
+    new3 = (c3_1 == 1 || c3_2 == 1) ? 1 : 2
+    new4 = (c4_1 == 1 || c4_2 == 1) ? 1 : 2
+    print key1, key2, new3, new4
+}' Dom_pepper.tsv Wild_pepper.tsv > Dom_pepper_Wild_pepper.tsv
 ```
 
 ```bash
 # 3) Rewiring analysis 
 
 ```r
-# 4) Visualization (edit folder_path inside script)
-Rscript scripts/Regulatory-Network-Plotter.R
+# 4) Visualization
+Rscript scripts/Regulatory_Network_Plotter.R
+# Generate visualizations
+# Note: Modify the path in the R script to point to the appropriate directory, also
+# modify line 146 to choose between labeled (TRUE) or unlabeled (FALSE) output networks.
+# Outputs will be stored in the assigned working directory.
 ```
 
 **Output**
 - Per-hormone ortholog tables (`*_OrthoSpecies.txt`).  
 - Merged summary (`HormoneOrthologs_5sets.txt`).  
 - Alluvial plot (`HormoneOrthologs_5sets_alluvial.png`).  
-- Species/condition TSV networks (per hormone) + concatenated phylogeny networks.  
+- Species/condition TSV networks (per hormone) + integrated phylogeny networks.  
 - **Rewiring reports:** Jaccard, gained, lost, sign-switch edges, centrality deltas.  
 - Publication-ready network figures (`.png`, `.svg`).  
 
