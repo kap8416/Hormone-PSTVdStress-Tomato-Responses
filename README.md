@@ -40,7 +40,8 @@ Hormone-PSTVdStress-Tomato-Responses/
 │   ├── tomato_healthy.Rmd                 # RMarkdown analysis of healthy tomato
 │   ├── int-tomato.Rmd                     # Integrative RMarkdown tomato transcriptomics
 │   ├── tomatohealthy_network.ipynb        # Healthy tomato networks (Jupyter)
-│   └── healthy-disease.ipynb              # Healthy vs diseased network comparisons (Jupyter)
+│   ├── healthy-disease.ipynb              # Healthy vs diseased network comparisons (Jupyter)
+    └── Regulatory_Network_Plotter.R       # Plot comparative regulatory networks
 │
 ├── results/
 │   └── HormoneOutputs_5sets/
@@ -345,7 +346,7 @@ python -m pip install pandas networkx matplotlib
 
 - **Network plotting (R):**  
   ```r
-  Rscript scripts/Regulatory-Network-Plotter.R
+  Rscript scripts/Regulatory_Network_Plotter.R
   ```  
 
 - **Phylogenomics (REvolutionH-tl):**  
