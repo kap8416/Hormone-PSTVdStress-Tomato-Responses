@@ -284,7 +284,7 @@ NR == FNR {
 ```r
 # 4) Visualization
 Rscript scripts/Regulatory_Network_Plotter.R
-# Generate visualizations
+# Regulatory_Network_Plotter.R  will take as input the files generated in step 2, and will expect them all to be in a single directory.
 # Note: Modify the path in the R script to point to the appropriate directory, also
 # modify line 146 to choose between labeled (TRUE) or unlabeled (FALSE) output networks.
 # Outputs will be stored in the assigned working directory.
