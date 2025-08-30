@@ -22,13 +22,20 @@ Hormone-PSTVdStress-Tomato-Responses/
 │
 ├── data/
 │   └── Inputs/
-│       └── Hormone_5sets/                 # Input hormone-target interactors
+│       ├── Hormone_5sets/                 # Input hormone-target interactors
 │           ├── ABA_interactorsEdit_sinPunto.txt
 │           ├── Auxin_interactorsEdit_sinPunto.txt
 │           ├── Ethylene_Solyc02g077370.1_interactors.txt
 │           ├── Ethylene_Solyc02g093130.1_interactors.txt
 │           ├── MYCinteractorsEdit.txt
 │           └── orthologs_Solanaceae.tsv   # Phylogenomic orthologs
+│       └── Comparative_networks/
+│           ├── ABA_interactors.tsv
+│           ├── Auxin_interactors.tsv
+│           ├── Ethylene_Solyc02g077370.1_interactors.tsv
+│           ├── Ethylene_Solyc02g093130.1_interactors.tsv
+│           ├── MYCinteractorsEdit.tsv
+│           └── HormoneOrthologs.tsv
 │
 ├── scripts/
 │   ├── corto_PSTVdTomato.R                # GRN inference + MRA (corto)
@@ -44,6 +51,23 @@ Hormone-PSTVdStress-Tomato-Responses/
     └── Regulatory_Network_Plotter.R       # Plot comparative regulatory networks
 │
 ├── results/
+│   └── Comparative_networks/
+│        └── preprocessing/
+│            ├── NAC/
+│                ├── Networks_figures_without_labels/
+│                └── Networks_figures_without_labels/
+│            ├── ethylene_AP2/
+│                ├── Networks_figures_without_labels/
+│                └── Networks_figures_without_labels/
+│            ├── ethylene_ERF_C_5/
+│                ├── Networks_figures_without_labels/
+│                └── Networks_figures_without_labels/
+│            ├── MYC2/
+│                ├── Networks_figures_without_labels/
+│                └── Networks_figures_without_labels/
+│            └── bZIP/
+│                ├── Networks_figures_without_labels/
+│                └── Networks_figures_without_labels/
 │   └── HormoneOutputs_5sets/
 │       └── Analysis/
 │           ├── HormoneOrthologs.txt / HormoneOrthologs_5sets.txt
