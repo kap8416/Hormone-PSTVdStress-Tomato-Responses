@@ -114,6 +114,9 @@ source("scripts/TomatoOrthologs_5Sets.R")
 
 ```bash
 # 2) Comparative networks
+#First, we manually added a second column to the interactor files located in this repository (data/Inputs/Hormone 5 Sets/). This second column corresponds to the ID of the corresponding regulatory element. For example, for the file MYCinteractorsEdit.txt, we added the ID Solyc08g076930. We also used the HormoneOrthologs.txt file (from results/HormoneOutputs_5sets), into which we manually integrated the ortholog information from results/MTRs_orthologs_summary.tsv.
+
+The resulting files were used as input for the next set of commands. Note thath all these operations are expected to be run from the same working directory.
 # Create working directories
 mkdir preprocessing
 cd preprocessing
