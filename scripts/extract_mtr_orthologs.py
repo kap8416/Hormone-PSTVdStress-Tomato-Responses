@@ -3,21 +3,21 @@
 """
 extract_mtr_orthologs.py
 --------------------------------
-Filtra y resume ortólogos de un conjunto de MTRs en un archivo TSV de Solanáceas.
+Filter and summarize orthologs of a given set of MTRs from a Solanaceae TSV file.
 
-Entradas esperadas (columnas del TSV):
-- a : ID de gen en la especie A (p.ej., Sopen*, SPI*, SLYcer*, PGSC*...)
-- b : ID de gen en tomate (Solyc*)
-- species_a : nombre corto de especie A (TomatoPennelli, Tomatopimp, Potato, etc.)
-- species_b : normalmente "tomato"
-- OG : (opcional) ID de grupo ortólogo
-- Normalized_bit_score : (opcional) puntuación
+Expected TSV input columns:
+- a : gene ID in species A (e.g., Sopen*, SPI*, SLYcer*, PGSC*...)
+- b : gene ID in tomato (Solyc*)
+- species_a : short name for species A (TomatoPennelli, Tomatopimp, Potato, etc.)
+- species_b : usually "tomato"
+- OG : (optional) ortholog group ID
+- Normalized_bit_score : (optional) score
 
-Salidas:
-- <outprefix>_table.tsv           -> tabla completa de pares ortólogos para los MTRs
-- <outprefix>_summary.tsv         -> resumen por MTR con lista de ortólogos por especie
-- <outprefix>_presence_absence.tsv-> matriz binaria MTR x especie
-- <outprefix>_heatmap.png         -> (opcional, con --heatmap) heatmap de presencia/ausencia (solo matplotlib)
+Outputs:
+- <outprefix>_table.tsv            -> complete table of ortholog pairs for the MTRs
+- <outprefix>_summary.tsv          -> summary per MTR with ortholog list by species
+- <outprefix>_presence_absence.tsv -> binary matrix MTR x species
+- <outprefix>_heatmap.png          -> (optional, with --heatmap) presence/absence heatmap (matplotlib)
 """
 
 import argparse
@@ -26,7 +26,7 @@ import re
 from pathlib import Path
 
 def base_id(x: str) -> str:
-    """Quita la versión de transcrito, e.g., Solyc06g060490.2 -> Solyc06g060490."""
+    """Remove transcript version, e.g., Solyc06g060490.2 -> Solyc06g060490."""
     return re.sub(r"\.\d+$", "", str(x).strip())
 
 def load_orthologs(tsv_path: str) -> pd.DataFrame:
@@ -34,7 +34,7 @@ def load_orthologs(tsv_path: str) -> pd.DataFrame:
     required = {"a", "b", "species_a"}
     missing = required - set(df.columns)
     if missing:
-        raise ValueError(f"Faltan columnas requeridas en el TSV: {missing}")
+        raise ValueError(f"Missing required columns in TSV: {missing}")
     df["a_base"] = df["a"].astype(str).apply(base_id)
     df["b_base"] = df["b"].astype(str).apply(base_id)
     return df
@@ -71,7 +71,7 @@ def plot_heatmap(mat_df, out_png):
     fig, ax = plt.subplots(figsize=(max(6, 1.2*data.shape[1]), 0.8*data.shape[0]+2))
     im = ax.imshow(data, aspect="auto")
 
-    # Colormap manual (greens) sin seaborn
+    # Manual colormap (greens), no seaborn
     from matplotlib.colors import ListedColormap
     cmap = ListedColormap(["#f7fcf5", "#00441b"])
     im.set_cmap(cmap)
@@ -83,10 +83,11 @@ def plot_heatmap(mat_df, out_png):
     ax.set_xticklabels(df.columns, rotation=45, ha="right")
     ax.set_yticklabels(df.index)
 
-    # Grid y anotaciones
+    # Grid and annotations
     for i in range(data.shape[0]):
         for j in range(data.shape[1]):
-            ax.text(j, i, f"{int(data[i, j])}", ha="center", va="center", color="white" if data[i,j] > 0.5 else "black", fontsize=9)
+            ax.text(j, i, f"{int(data[i, j])}", ha="center", va="center",
+                    color="white" if data[i,j] > 0.5 else "black", fontsize=9)
 
     ax.set_title("Presence/Absence of MTR Orthologs in Solanaceae Species", fontsize=12)
     ax.set_xlabel("Species")
@@ -96,10 +97,10 @@ def plot_heatmap(mat_df, out_png):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--tsv", required=True, help="Ruta al archivo orthologs_Solanaceae.tsv")
-    p.add_argument("--mtrs", nargs="+", required=True, help="Lista de IDs Solyc de MTRs (con o sin versión)")
-    p.add_argument("--outprefix", default="MTRs_orthologs", help="Prefijo de salida")
-    p.add_argument("--heatmap", action="store_true", help="Generar heatmap PNG (matplotlib)")
+    p.add_argument("--tsv", required=True, help="Path to orthologs_Solanaceae.tsv")
+    p.add_argument("--mtrs", nargs="+", required=True, help="List of Solyc IDs of MTRs (with or without version)")
+    p.add_argument("--outprefix", default="MTRs_orthologs", help="Output file prefix")
+    p.add_argument("--heatmap", action="store_true", help="Generate heatmap PNG (matplotlib)")
     args = p.parse_args()
 
     outprefix = Path(args.outprefix)
@@ -108,21 +109,21 @@ def main():
     df = load_orthologs(args.tsv)
     df_mtrs = filter_by_mtrs(df, args.mtrs)
 
-    # Guardar tabla completa
+    # Save full table
     table_path = f"{outprefix}_table.tsv"
     df_mtrs.drop(columns=["a_base","b_base"], errors="ignore").to_csv(table_path, sep="\t", index=False)
 
-    # Resumen consolidado
+    # Consolidated summary
     summary_df = make_summary(df_mtrs)
     summary_path = f"{outprefix}_summary.tsv"
     summary_df.to_csv(summary_path, sep="\t", index=False)
 
-    # Matriz presencia/ausencia
+    # Presence/absence matrix
     pa_df = presence_absence(df_mtrs)
     pa_path = f"{outprefix}_presence_absence.tsv"
     pa_df.to_csv(pa_path, sep="\t", index=False)
 
-    # Heatmap opcional
+    # Optional heatmap
     if args.heatmap:
         heatmap_path = f"{outprefix}_heatmap.png"
         plot_heatmap(pa_df, heatmap_path)
