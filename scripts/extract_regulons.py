@@ -4,7 +4,7 @@ from pathlib import Path
 from caas_jupyter_tools import display_dataframe_to_user
 
 # Path to the uploaded network
-path = Path("/mnt/data/net_corto_prom.txt")
+path = Path("/katiaavinapadilla/data/net_corto_prom.txt")
 
 # Read the tab-separated file (source, target, weight)
 df = pd.read_csv(path, sep=r"\s+", header=None, names=["MTR","Target","Weight"], engine="python")
